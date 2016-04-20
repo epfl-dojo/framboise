@@ -14,7 +14,7 @@ Une présentation du déroulement et du projet est organisée par les apprentis.
 
 ## Matériel de départ
 * Raspberry 3 starter kit: [The Reichelt Raspberry Pi 3 all-in bundle](https://secure.reichelt.com/Single-board-computer/RASP-3-ALL-IN/3/index.html?&ACTION=3&LA=2&ARTICLE=167080&GROUPID=6666&artnr=RASP+3+ALL+IN)
-* Ecran LCD: [RASP C-BERRY :: 8.9-cm (3.5") LCD for Raspberry Pi, 320 x 240p](https://secure.reichelt.com/More-accessories/RASP-C-BERRY/3/index.html?&ACTION=3&LA=3&ARTICLE=141511&GROUPID=6671)
+* Ecran LCD: [RASP C-BERRY :: 8.9-cm (3.5") LCD for Raspberry Pi, 320 x 240p](https://secure.reichelt.com/More-accessories/RASP-C-BERRY/3/index.html?&ACTION=3&LA=3&ARTICLE=141511&GROUPID=6671) - [DOC](http://admatec.de/sites/default/files/downloads/C-Berry.tar.gz)
 
 ## Contenu du cahier des charges
 Le cahier des charges est un document complet présentant la totalité du projet. Il comprendra au minimum :
