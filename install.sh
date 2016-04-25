@@ -1,5 +1,6 @@
 #!/bin/bash
-# curl -s https://raw.githubusercontent.com/epfl-dojo/framboise/master/install.sh | sudo bash -s --h
+# Usage:
+# 	curl -s https://raw.githubusercontent.com/epfl-dojo/framboise/master/install.sh | sudo bash /dev/stdin --h
 
 # Be sure to be root
 if [ "$EUID" -ne 0 ]
