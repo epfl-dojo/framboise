@@ -1,9 +1,9 @@
 import pygame
 import RPi.GPIO as GPIO
 import time
+import os
 
 def test():
-    #print when button is pressed
     buttonPin = 21
 
     GPIO.setmode(GPIO.BCM)
@@ -44,7 +44,7 @@ def timer():
          
         frame_count = 0
         frame_rate = 60
-        start_time = 300
+        start_time = 3
          
         # -------- Main Program Loop -----------
         while not done:
@@ -61,6 +61,7 @@ def timer():
             total_seconds = start_time - (frame_count // frame_rate)
             if total_seconds < 0:
                 total_seconds = 0
+		os.popen("cvlc /home/pi/Alarm.mp3")
          
             # Divide by 60 to get total minutes
             minutes = total_seconds // 60
