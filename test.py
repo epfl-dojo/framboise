@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 import time
 import os
 
-def UpdateButton():
+def Update():
     global PreviousState
     global PushTick
     global ButtonState
@@ -18,7 +18,7 @@ def UpdateButton():
         
         if input == 0:
             ButtonState = "Pushed"
-            PushTick = time.perf_counter()
+        PushTick = time.perf_counter()
             
         else:
             ResetTrigger = 0
@@ -29,7 +29,7 @@ def UpdateButton():
             ButtonState = "Push"
             PushDuration = time.perf_counter() - PushTick
             #vérifier etat du chrono
-                
+            
             if (PushDuration > 2) and (ResetTrigger == 0):
                 ResetTrigger = 1
                 ButtonState = "Pushed2Second"
@@ -38,26 +38,25 @@ def UpdateButton():
             ButtonState = "Release"
     print(ButtonState)
             
-    #if ButtonState == "Pushed":
-    #    print("Start")
-    #elif ButtonState == "Released":
-    #    print("Stop")
+    if ButtonState == "Pushed":
+        print("Start")
+    elif ButtonState == "Released":
+        print("Stop")
         
-    #cycle += 1
-    #BLACK = (0, 0, 0)
-    #WHITE = (255, 255, 255)
-    #screen.fill(BLACK)
+    cycle += 1
+    BLACK = (0, 0, 0)
+    WHITE = (255, 255, 255)
+    screen.fill(BLACK)
     # Blit to the screen
-    #text = font.render("%d" % cycle, True, WHITE)
+    text = font.render("%d" % cycle, True, WHITE)
          
-    #screen.blit(text, [100, 100])
+    screen.blit(text, [100, 100])
             
     #Go ahead and update the screen with what we've drawn.
-    #pygame.display.flip()         
+    pygame.display.flip()         
 
-    #pygame.display.set_caption("Timer")
-def test():
-    print("On est dans une autre fonction" + ButtonState)
+    pygame.display.set_caption("Timer")
+
 def UpdateChrono():
     global frame_count
     global frame_rate
@@ -98,8 +97,8 @@ WHITE = (255, 255, 255)
 screen = pygame.display.set_mode(size)
 font = pygame.font.Font(None, 50)
 screen.fill(BLACK)
- #Blit to the screen
-text = font.render(" ", True, WHITE)
+# Blit to the screen
+text = font.render("Hello", True, WHITE)
          
 screen.blit(text, [100, 100])
             
@@ -110,9 +109,7 @@ pygame.display.set_caption("Timer")
 
 while True:
     Start = time.perf_counter()
-    UpdateButton()
-    test()
-    print("On est en dehors de la fonction" + ButtonState)
+    Update()
     Elapsed = time.perf_counter() - Start;
     Sleep = 1/60 - Elapsed
     #print(Sleep)
@@ -126,7 +123,7 @@ while True:
         time.sleep(0.5)
 
     
-         #Define some colors
+        # Define some colors
         BLACK = (0, 0, 0)
         WHITE = (255, 255, 255)
          
@@ -191,4 +188,4 @@ while True:
          
         # Be IDLE friendly. If you forget this line, the program will 'hang'
         # on exit.
-            pygame.quit()
+        pygame.quit()
