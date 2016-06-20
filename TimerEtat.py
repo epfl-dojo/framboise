@@ -12,31 +12,37 @@ def Update():
     global font
     global cycle
     input = GPIO.input(buttonPin)
+    
     if input != PreviousState:
         PreviousState = input
-        if input == 0:
-            ButtonState = "Pushed"
-            PushTick = time.perf_counter()
-        else:
-            ResetTrigger = 0
-            ButtonState = "Released"
-            PushDuration = time.perf_counter() - PushTick
+        
+        #if input == 0:
+        #    ButtonState = "Pushed"
+        PushTick = time.perf_counter()
+            
+        #else:
+            #ResetTrigger = 0
+            #ButtonState = "Released"
+            #PushDuration = time.perf_counter() - PushTick
     else:
         if PreviousState == 0:
             ButtonState = "Push"
             PushDuration = time.perf_counter() - PushTick
+            #vérifier etat du chrono
+            
             if (PushDuration > 2) and (ResetTrigger == 0):
                 ResetTrigger = 1
                 ButtonState = "Pushed2Second"
+                #reset chrono
         else:
             ButtonState = "Release"
     #print(ButtonState)
-    if ButtonState == "Pushed":
-        print("Start")
-    elif ButtonState == "Released":
-        print("Stop")
+            
+    #if ButtonState == "Pushed":
+    #    print("Start")
+    #elif ButtonState == "Released":
+    #    print("Stop")
         
-
     cycle += 1
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
@@ -50,7 +56,27 @@ def Update():
     pygame.display.flip()         
 
     pygame.display.set_caption("Timer")
+
+def UpdateChrono():
+    global frame_count
+    global frame_rate
+    global start_time
+    global timer_state
+    frame_count = 0
+    frame_rate = 60
+    start_time = 300
+    
+    if frame_count==0:
+        timer_state = initial
         
+    elif (frame_count > 0 and frame_count < 300):
+        timer_state = demarrer
+
+    elif frame_count == 300:
+        timer_state = fini
+    else:
+        print("ERROR")
+                  
             
 buttonPin = 21
 
@@ -80,6 +106,7 @@ screen.blit(text, [100, 100])
 pygame.display.flip()         
 
 pygame.display.set_caption("Timer")
+
 while True:
     Start = time.perf_counter()
     Update()
@@ -117,9 +144,7 @@ while True:
          
         font = pygame.font.Font(None, 50)
          
-        frame_count = 0
-        frame_rate = 60
-        start_time = 300         
+             
         # -------- Main Program Loop -----------
         while not done:
             for event in pygame.event.get():
@@ -154,7 +179,6 @@ while True:
          
             # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
             frame_count += 1
-            
          
             # Limit frames per second
             clock.tick(frame_rate)
