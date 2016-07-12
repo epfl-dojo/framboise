@@ -61,7 +61,7 @@ def timer():
             total_seconds = start_time - (frame_count // frame_rate)
             if total_seconds < 0:
                 total_seconds = 0
-		os.popen("cvlc /home/pi/Alarm.mp3")
+                os.popen("cvlc /home/pi/framboise/Alarm.mp3")
          
             # Divide by 60 to get total minutes
             minutes = total_seconds // 60
@@ -90,7 +90,7 @@ def timer():
         # on exit.
         pygame.quit()
         
-    	return
+        return
 
 test();
 
