@@ -3,6 +3,16 @@ import RPi.GPIO as GPIO
 import time
 import os
 
+def mainLoop():
+    UpdateButton()
+    UpdateTimer()
+    #print(showedTime)
+    #print(minutes)
+    #print(seconds)
+    print(output_string)
+    #print("-------------")
+    #print(TimerState)
+    #time.sleep(0.2)
 
 def UpdateTimer():
     global actualTime
@@ -10,18 +20,27 @@ def UpdateTimer():
     global showedTime
     global TimerState
     global totalTime
+    global minutes
+    global seconds
+    global output_string
 
     actualTime = time.time()
 
     if (ButtonState == "Release" or ButtonState == "Released" or ButtonState == "Push"):
         if TimerState == "initial":
-            showedTime = 10
+            showedTime = 300
         elif TimerState == "started":
             showedTime = totalTime -(actualTime - startTime)
         elif TimerState == "pause":
-            showedTime = showedTime                    
+            showedTime = showedTime
+        elif TimerState == "finish":
+            print("finish")
+            showedTime = 0
+            startTime = 0
+            actualTime = 0
+            totalTime = 300
         else:
-            print("error")
+            print("error 1")
             
     elif ButtonState == "Pushed":
         
@@ -35,9 +54,11 @@ def UpdateTimer():
         elif TimerState == "pause":
             startTime = time.time()
             showedTime = totalTime -(actualTime - startTime)
-            TimerState = "started"  
+            TimerState = "started"
+        elif TimerState == "finish":
+            TimerState = "initial"
         else:
-            print("error")
+            print("error 2")
 
     elif ButtonState == "Pushed2Second":
         TimerState = "initial"
@@ -45,7 +66,15 @@ def UpdateTimer():
         startTime = 0
         actualTime = 0
         totalTime = 300
+    else:
+        print("error 3")
 
+    if showedTime < 0:
+        TimerState = "finish"
+
+    minutes = showedTime // 60
+    seconds = showedTime % 60
+    output_string = "{0:02}:{1:02}".format(round(minutes-0.4), round(seconds-0.4))
 
 def UpdateButton():
     global PreviousState
@@ -59,7 +88,6 @@ def UpdateButton():
     
     if input != PreviousState:
         PreviousState = input
-        300
         if input == 0:
             ButtonState = "Pushed"
             PushTick = time.perf_counter()
@@ -89,21 +117,14 @@ cycle = 0
 ButtonState = "Release"
 ResetTrigger = 0
 TimerState = "initial"
-showedTime = 10
+showedTime = 300
 startTime = 0
 actualTime = 0
-totalTime = 10
-while showedTime > 0:
-    UpdateButton()
-    UpdateTimer()
-    print(showedTime)
-    time.sleep(0.5)
-    
-#os.popen("cvlc /home/pi/framboise/Alarm.mp3")
-print("alarm")
-showedTime = 10
-startTime = 0
-actualTime = 0
-totalTime = 10
+totalTime = 300
+
+while True:
+    mainLoop()
+
+
     
     
