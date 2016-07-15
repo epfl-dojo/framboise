@@ -8,13 +8,8 @@ from pygame import mixer
 def mainLoop():
     UpdateButton()
     UpdateTimer()
-    #print(showedTime)
-    #print(minutes)
-    #print(seconds)
     print(output_string)
-    #print("-------------")
-    #print(TimerState)
-    #time.sleep(0.2)
+
 
 def UpdateTimer():
     global actualTime
@@ -28,39 +23,45 @@ def UpdateTimer():
     global screen
     global font
     global text
+    global roundTime
+    global initialTime
+    global i
 
-    actualTime = round(time.time())
+
+
+    roundTime = round(time.time())
+    actualTime = roundTime
     screen.fill(BLACK)
 
     if (ButtonState == "Release" or ButtonState == "Released" or ButtonState == "Push"):
         if TimerState == "initial":
-            showedTime = 300
+            showedTime = initialTime
         elif TimerState == "started":
             showedTime = totalTime -(actualTime - startTime)
         elif TimerState == "pause":
             showedTime = showedTime
         elif TimerState == "finish":
-            print("finish")
+            #print("finish")
             showedTime = 0
             startTime = 0
             actualTime = 0
-            totalTime = 300
+            totalTime = initialTime
             alert.play()
-            time.sleep(1)     
+            time.sleep(1) 
         else:
             print("error 1")
             
     elif ButtonState == "Pushed":
         
         if TimerState == "initial":
-            startTime = round(time.time())
+            startTime = roundTime
             TimerState = "started"
         elif TimerState == "started":
-            startPauseTime = round(time.time())
+            startPauseTime = roundTime
             totalTime = showedTime
             TimerState = "pause"   
         elif TimerState == "pause":
-            startTime = round(time.time())
+            startTime = roundTime
             showedTime = totalTime -(actualTime - startTime)
             TimerState = "started"
         elif TimerState == "finish":
@@ -70,16 +71,17 @@ def UpdateTimer():
 
     elif ButtonState == "Pushed2Second":
         TimerState = "initial"
-        showedTime = 300
+        showedTime = initialTime
         startTime = 0
         actualTime = 0
-        totalTime = 300
+        totalTime = initialTime
     else:
         print("error 3")
 
     if showedTime == 0:
         TimerState = "finish"
 
+    #calcul du temps et format en minutes
     minutes = showedTime // 60
     seconds = showedTime % 60
     output_string = "{0:02}:{1:02}".format(round(minutes-0.4), round(seconds-0.4))
@@ -136,10 +138,13 @@ cycle = 0
 ButtonState = "Release"
 ResetTrigger = 0
 TimerState = "initial"
-showedTime = 5
+initialTime = 300
+showedTime = initialTime
 startTime = 0
 actualTime = 0
-totalTime = 5
+totalTime = initialTime
+i = 4000
+
 
 while True:
     mainLoop()
