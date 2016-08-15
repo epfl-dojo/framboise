@@ -62,4 +62,3 @@ A suivre...
 ## Documentation
 
 ## Synthèse
->>>>>>> 0c8202c983d13867e751a058fb7d3148001b0098
