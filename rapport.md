@@ -1,6 +1,6 @@
 # Rapport de projet
 
-## Introduction
+## Description du projet
 Ce projet a pour but de faire un timer de 5 minutes pour le dojo. Le dojo est une séance de programmation en communauté où chacun code par tour de 5 minutes sur un projet commun hébergé sur un laptop qui se passe de personne en personne. Cet appareil doit être fait à partir d'un raspberry pi et fonctionner grâce à une batterie.
 
 L'objectif est d'avoir un timer *portable* de 5 minutes dont la majorité des fonctions sont couvertes par un seul bouton (le fameux buzzer). Ces fonctions sont le démarrage, la pause et la réinitialisation. Un deuxième bouton de type on/off se charge d'allumer et éteindre l'appareil simplement en enclanchant ou en coupant l'alimentation. Le temps restant s'affiche sur un écran tft C-Berry. Au terme des 5 minutes une alarme s'enclenche. Une fois l'alarme enclenchée une pression de réinitialisation (pression longue) le remet à 5 minutes.
