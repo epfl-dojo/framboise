@@ -35,6 +35,8 @@ des interactions entre le timer(et son interface) et le bouton.
 |----------|:-------------------------:|
 | 29.04.16 | Paufinage du code         |
 | 15.08.16 | Rédaction du rapport de projet |
+| 19.08.16 | Script installation bash |
+| 26.08.16 | Script installation bash & base slides impress.js |
 
 A suivre...
 =======
